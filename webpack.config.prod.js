@@ -16,6 +16,7 @@ module.exports = {
     ],//设置生成的html内容
     module: {
         rules: [
+            ...base.module.rules,
             {
                 test: /\.css$/i,//正则表达式，如果发现任何以.css结尾的文件名
                 use: [

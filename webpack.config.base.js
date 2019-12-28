@@ -9,10 +9,37 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin(
         {
             title: 'My App',
-            template: 'assets/index.html'//新建目录文件assets/admin.html
+            template: 'src/assets/index.html'//新建目录文件assets/admin.html
         })
     ],//设置生成的html内容
     module: {
-        rules: []
+        rules: [
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader',
+                ],
+            },
+            {
+                test: /\.styl$/,
+                loader: ['style-loader', 'css-loader', 'stylus-loader']
+            },
+            {
+                test: /\.less$/,
+                loader: ["style-loader", "css-loader", 'less-loader'],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    "style-loader", // 将 JS 字符串生成为 style 节点
+                    "css-loader", // 将 CSS 转化成 CommonJS 模块
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            implementation: require('dart-sass')
+                        }
+                    }
+                ]
+            }]
     }
 }
